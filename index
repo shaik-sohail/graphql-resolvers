@@ -1,7 +1,19 @@
 const { ApolloServer } = require("apollo-server");
 const { typeDefs } = require("./Schema");
-const { resolvers } = require("./resolvers/Query");
-const server = new ApolloServer({ typeDefs, resolvers });
+const { Query } = require("./resolvers/Query");
+const { Tweet } = require("./resolvers/Tweet");
+const { Date } = require("./resolvers/Date");
+const { Url } = require("./resolvers/Url");
+const { users, notifications, tweets, stats } = require("./db");
+const server = new ApolloServer({
+  typeDefs,
+  resolvers: {
+    Query,
+    Tweet,
+    Date,
+    Url,
+  },
+});
 
 server.listen().then(({ url }) => {
   return "Listening at: " + url;
