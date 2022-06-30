@@ -14,7 +14,6 @@ exports.typeDefs = gql`
   scalar Url
   scalar Date
   type User {
-    id: ID!
     username: String
     first_name: String
     last_name: String
@@ -29,7 +28,7 @@ exports.typeDefs = gql`
     responses: Int
   }
   type Notification {
-    id: ID
+    id: ID!
     date: Date
     type: String
   }
@@ -49,5 +48,10 @@ exports.typeDefs = gql`
     user(id: ID!): User
     notifications(limit: Int): [Notification]
     notificationsMeta: Meta
+  }
+  type Mutation {
+    createTweet(body: String): Tweet
+    deleteTweet(id: ID!): Tweet
+    markTweetRead(id: ID!): Boolean
   }
 `;
